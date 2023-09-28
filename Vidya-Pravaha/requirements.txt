@@ -1,0 +1,14 @@
+django.contrib.admin 
+django.contrib.auth 
+django.contrib.contenttypes 
+django.contrib.sessions 
+django.contrib.messages 
+django.contrib.staticfiles 
+django.contrib.humanize
+widget_tweaks 
+bootstrap_modal_forms 
+bootstrap3 
+django_forms_bootstrap 
+crispy_forms 
+crispy_bootstrap5 
+elearn

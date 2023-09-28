@@ -1,0 +1,56 @@
+{% extends 'dashboard/learner/base.html' %}
+{% load static %}
+
+
+{% block body %}
+  <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 mb-3">
+          <div class="col-12 mb-3">
+            <div class="container" style="padding-top: 3%;">
+                <h2 class="mb-3">I am your mini ChatGPT.. Ask me anything...</h2>
+                <form action="/bot_search/" method="GET">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" style="font-size: 2.5ch; padding-bottom: 1%;">What's Your Query</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Query" name="query">
+                  </div>
+                  <button type="submit" class="btn btn-outline-danger">Search</button>
+                </form>
+          
+          
+                {% if ans %}
+          
+                <h4 style="color: darkgray; padding-top: 2%;">Search Result for {{query}} :</h4>
+                <h4 style="padding-top: 2%;">{{ans}}</h4>
+          
+                {% endif %}
+              </div>
+
+
+                </div>
+        </div>
+
+    </div>  
+</div>
+
+
+
+<div class="col-sm-1">
+</div>
+
+
+</div>
+
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}
+
+
+
+
+

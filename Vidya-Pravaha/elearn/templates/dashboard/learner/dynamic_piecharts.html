@@ -1,0 +1,128 @@
+<!-- dynamic_pie_charts.html -->
+{% extends 'dashboard/learner/base.html' %}
+{% load static %}
+
+
+{% block body %}
+<section id="content-wrapper">
+    <div class="row">
+        {% for quiz in quiz_data %}
+        <div class="col-lg-6">
+            <div class="card card-danger" style="border: 1px solid grey; margin: 5px;">
+                <div class="card-header" style="border-bottom: 1px solid grey;">
+                    <h3 class="card-title card-danger"> Quiz{{ forloop.counter }} Result Chart</h3>
+                    <div class="card-tools">
+                    </div>
+                </div>
+                <div class="card-body" style="width: 500px;">
+                    <div>
+                        <h3 id="can_Change">Quiz Name:- {{ quiz.name }}</h3>
+                        <p id="marks{{forloop.counter}}"></p>
+                        <canvas id="pieChart{{ forloop.counter }}" style="min-height: 230px; height: 230px; max-height: 230px; max-width: 100%; "></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    {% for quiz in quiz_data %}
+    // JavaScript code to create a pie chart for the current quiz
+    var ctx{{forloop.counter}} = document.getElementById('pieChart{{ forloop.counter }}').getContext('2d');
+    var data{{forloop.counter}} = {
+        labels: ['Score%', 'Wrong Answer%'],
+        datasets: [{
+            data: [{{ quiz.score }}, 100 + {{ quiz.num_questions }} - {{ quiz.score }}],
+    backgroundColor: ['green', 'red']
+        }]
+    };
+    var pieChart{{forloop.counter}} = new Chart(ctx{{forloop.counter}}, {
+        type: 'pie',
+        data: data{{forloop.counter}}
+    });
+
+    document.getElementById('marks{{forloop.counter}}').innerText ="Your percentage: "+{{ quiz.score }} +"%"
+{% endfor %}
+    // {% if quiz_data|length == 1 and quiz.data.0.score == None %}
+    // document.getElementById('can_Change').innerText="Not attended any quiz"
+    // {%endif%}
+</script>
+{% endblock %}
+
+<!-- <script>
+    // JavaScript code to create pie charts for each quiz
+    // Iterate through quiz_data and create pie charts
+    {% for quiz in quiz_data %}
+    var ctx{{ forloop.counter }} = document.getElementById('quizChart{{ forloop.counter }}').getContext('2d');
+    var scores{{ forloop.counter }} = {{ data.scores|safe }};
+    var numQuestions{{ forloop.counter }} = {{ data.num_questions | default:"0"}} ;
+
+    var chartData{{ forloop.counter }} = {
+        labels: ['Correct', 'Incorrect'],
+        datasets: [{
+            data: [scores{{ forloop.counter }}, ((100.0 - scores{{forloop.counter}}) - numQuestions{{ forloop.counter }})],
+        backgroundColor: ['green', 'red']
+        }]
+    };
+
+    var myPieChart{{ forloop.counter }} = new Chart(ctx{{ forloop.counter }}, {
+        type: 'pie',
+        data: chartData{{ forloop.counter }}
+    });
+
+    document.getElementById('marks{{forloop.counter }}').innerText="Percentage:- " +scores{{forloop.counter}} +"%"
+    {% endfor %}
+</script> -->
+<!-- {% for data in quiz_data %}
+    <div>
+        <h2>{{ data.name }}</h2>
+        <canvas id="quizChart{{ forloop.counter }}" width="400" height="400"></canvas>
+    </div>
+    {% endfor %} -->
+
+<!-- Include Chart.js library (make sure to include it) -->
+
+
+<!-- dynamic_piecharts.html -->
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pie Charts</title>
+    <!-- Include Chart.js -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body>
+    <h1>Pie Charts</h1> --> -->
+
+<!-- Create a container for each pie chart -->
+<!-- {% for quiz in quiz_data %}
+    <div style="width: 400px; height: 400px; display: inline-block;">
+        <canvas id="pieChart{{ forloop.counter }}"></canvas>
+    </div> -->
+<!-- <script>
+        // JavaScript code to create a pie chart for the current quiz
+        var ctx = document.getElementById('pieChart{{ forloop.counter }}').getContext('2d');
+        var data = {
+            labels: ['Score', 'Remaining Questions'],
+            datasets: [{
+                data: [{{ quiz.score }}, {{ quiz.num_questions }} - {{ quiz.score }}],
+                backgroundColor: ['green', 'gray']
+            }]
+        };
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data
+        });
+    </script>
+    {% endfor %} -->
+<!-- </body>
+
+</html> -->
